@@ -152,6 +152,43 @@
 
     if (counter) counter.textContent = (current + 1) + ' / ' + thumbs.length;
 
+    // Arrastar/deslizar com o dedo troca de foto (mobile) — tanto na foto
+    // principal quanto no lightbox. Só conta como swipe se o arraste for
+    // mais horizontal que vertical e passar de 40px, senão deixa o gesto
+    // seguir normal (rolar a página verticalmente, ou virar tap/clique).
+    function addSwipe(el, onNext, onPrev) {
+      if (!el) return;
+      var startX = null, startY = null, active = false, wasSwipe = false;
+      el.style.touchAction = 'pan-y';
+      el.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        startX = e.clientX; startY = e.clientY; active = true; wasSwipe = false;
+      });
+      el.addEventListener('pointermove', function (e) {
+        if (!active || startX === null) return;
+        if (Math.abs(e.clientX - startX) > 10) wasSwipe = true;
+      });
+      el.addEventListener('pointerup', function (e) {
+        if (!active || startX === null) { active = false; return; }
+        active = false;
+        var dx = e.clientX - startX;
+        var dy = e.clientY - startY;
+        startX = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          wasSwipe = true;
+          if (dx < 0) onNext(); else onPrev();
+        }
+      });
+      el.addEventListener('pointercancel', function () { active = false; startX = null; });
+      // Suprime o "tap" (abrir lightbox / clique) só quando o gesto foi
+      // realmente um swipe — um tap normal continua funcionando.
+      el.addEventListener('click', function (e) {
+        if (wasSwipe) { e.stopImmediatePropagation(); e.preventDefault(); wasSwipe = false; }
+      }, true);
+    }
+    addSwipe(main, function () { activate(current + 1); }, function () { activate(current - 1); });
+    if (lightboxImg) addSwipe(lightboxImg, function () { activate(current + 1); }, function () { activate(current - 1); });
+
     if (lightbox && lightboxImg && lightboxClose) {
       var openLightbox = function () {
         lightboxImg.src = main.currentSrc || main.src;
@@ -398,86 +435,6 @@
       window.open(url, '_blank', 'noopener');
       closeModal();
     });
-  }
-
-  // ---------- Galeria "Nossa história": fotos se separando ao rolar (mobile) ----------
-  function initGalleryStack() {
-    if (!window.matchMedia('(max-width: 640px)').matches) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    var pin = document.getElementById('showcaseGalleryPin');
-    var gallery = document.querySelector('.showcase-gallery');
-    var photos = Array.prototype.slice.call(document.querySelectorAll('.showcase-gallery .gallery-photo'));
-    var arrows = Array.prototype.slice.call(document.querySelectorAll('.showcase-gallery .gallery-arrow'));
-    if (!pin || !gallery || photos.length < 2) return;
-
-    var EXTRA = 420; // distância extra de scroll travado até soltar a página
-
-    // Medidas naturais (sem transform) cacheadas à parte — ler
-    // getBoundingClientRect() de um elemento já transformado a cada frame
-    // realimenta o próprio cálculo e causa tremedeira.
-    var metrics = [];
-    function measure() {
-      photos.forEach(function (photo) { photo.style.transform = 'none'; });
-      var cumulative = 0;
-      metrics = photos.map(function (photo) {
-        var rect = photo.getBoundingClientRect();
-        var m = { stackOffset: cumulative };
-        cumulative += rect.height + 24;
-        return m;
-      });
-      pin.style.height = (gallery.getBoundingClientRect().height + EXTRA) + 'px';
-    }
-
-    var ticking = false;
-
-    function update() {
-      ticking = false;
-      var rect = pin.getBoundingClientRect();
-      var scrolled = -rect.top;
-      var progress = clamp(scrolled / EXTRA, 0, 1);
-
-      // Cada foto se solta em sua própria fatia do progresso, em sequência.
-      var p1 = clamp(progress / 0.55, 0, 1);
-      var p2 = clamp((progress - 0.45) / 0.55, 0, 1);
-      var progresses = [1, p1, p2];
-
-      photos.forEach(function (photo, i) {
-        if (i === 0) return;
-        var pr = progresses[i];
-        var offset = -metrics[i].stackOffset * (1 - pr);
-        var rotate = (i % 2 === 0 ? 1 : -1) * 5 * (1 - pr);
-
-        photo.style.transform = 'translateY(' + offset + 'px) rotate(' + rotate + 'deg)';
-        photo.style.zIndex = String(10 + i);
-
-        // A seta só faz sentido depois que a foto que ela aponta já
-        // assentou no lugar — tentar seguir a foto com o mesmo offset
-        // ficava fora de sincronia, já que a posição base da seta no
-        // grid não se move junto com o transform da foto.
-        var arrow = arrows[i - 1];
-        if (arrow) {
-          arrow.style.opacity = String(pr);
-          arrow.style.transform = 'scale(' + (0.6 + 0.4 * pr) + ')';
-        }
-      });
-    }
-
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(update);
-    }
-
-    function onResize() {
-      measure();
-      update();
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
-    measure();
-    update();
   }
 
   // ---------- Lightbox da galeria "Nossa história" ----------
@@ -800,7 +757,6 @@
     initFeatureChips();
     initFinanceSim();
     initHistoryLightbox();
-    initGalleryStack();
     initHeroScroll();
     initTimelineTrack();
 
