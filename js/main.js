@@ -20,7 +20,7 @@
     if (!grid || typeof VEICULOS_DESTAQUE === 'undefined') return;
 
     var html = VEICULOS_DESTAQUE.map(function (v) {
-      var href = 'veiculos/' + v.slug + '/';
+      var href = v.path;
       var specs = (v.ano ? '<span>' + v.ano + '</span>' : '') +
         '<span>' + formatKM(v.km) + '</span>';
       var pos = v.fotoPos ? ' style="object-position:' + v.fotoPos + '"' : '';
@@ -202,14 +202,14 @@
     if (!similares.length) { section.remove(); return; }
 
     wrap.innerHTML = similares.map(function (v) {
-      var href = '../' + v.slug + '/';
+      var href = v.path;
       var specs = (v.ano ? '<span>' + v.ano + '</span>' : '') +
         '<span>' + formatKM(v.km) + '</span>';
       var pos = v.fotoPos ? ' style="object-position:' + v.fotoPos + '"' : '';
       return (
         '<article class="vehicle-card">' +
           '<a class="vehicle-media" href="' + href + '">' +
-            '<img src="../../' + v.foto + '" alt="' + v.nome + '" loading="lazy"' + pos + ' />' +
+            '<img src="' + v.foto + '" alt="' + v.nome + '" loading="lazy"' + pos + ' />' +
           '</a>' +
           '<div class="vehicle-card-body">' +
             '<div class="vehicle-card-heading">' +
@@ -757,9 +757,13 @@
     update();
   }
 
+  // Exposto pra js/veiculo-page.js (ficha dinâmica /veiculo/:id) reusar a
+  // mesma lógica de galeria/financiamento/chips depois de montar o DOM do
+  // veículo via fetch — nessas páginas os elementos não existem ainda no
+  // DOMContentLoaded (chegam só depois que window.VEICULOS_READY resolve).
+  window.SitePageInit = { initVehicleGallery: initVehicleGallery, initFeatureChips: initFeatureChips, initFinanceSim: initFinanceSim, formatBRL: formatBRL, formatKM: formatKM };
+
   document.addEventListener('DOMContentLoaded', function () {
-    renderVeiculos();
-    initVehicleCarousel();
     initHeader();
     initMobileNav();
     initReveal();
@@ -767,11 +771,20 @@
     initFooterYear();
     initVehicleGallery();
     initFeatureChips();
-    initSimilarVehicles();
     initFinanceSim();
     initHistoryLightbox();
     initGalleryStack();
     initHeroScroll();
     initTimelineTrack();
+
+    // Depende do estoque (busca no Supabase, ver js/veiculos-data.js) —
+    // só roda depois que window.VEICULOS_DESTAQUE está preenchido de verdade.
+    if (typeof window.VEICULOS_READY !== 'undefined') {
+      window.VEICULOS_READY.then(function () {
+        renderVeiculos();
+        initVehicleCarousel();
+        initSimilarVehicles();
+      });
+    }
   });
 })();

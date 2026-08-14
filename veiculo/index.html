@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veículo | Sul Veículos</title>
+  <meta name="description" content="Confira este veículo disponível na Sul Veículos, Primavera do Leste, MT." />
+  <meta name="theme-color" content="#0d0d0d" />
+  <link rel="icon" href="../imagens/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html#topo" aria-label="Sul Veículos, início">
+        <img src="../imagens/logo.png" alt="Sul Veículos, desde 2002" />
+      </a>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <ul>
+          <li><a href="../estoque/">Estoque</a></li>
+          <li><a href="../index.html#sobre">Sobre</a></li>
+          <li><a href="../sobre/">Nossa História</a></li>
+          <li><a href="../index.html#localizacao">Localização</a></li>
+          <li><a href="../index.html#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a class="icon-btn instagram-icon" href="https://www.instagram.com/sul_veiculosmt/" target="_blank" rel="noopener" aria-label="Instagram da Sul Veículos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" /></svg>
+        </a>
+        <a class="btn btn-primary btn-sm whatsapp-header-btn" href="https://wa.me/5566992123356?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Sul%20Ve%C3%ADculos%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6l.4-.5c.1-.1.2-.3.2-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.3-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1l-.2-.1Z" /><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Z" /></svg>
+          <span>WhatsApp</span>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação mobile">
+    <ul>
+      <li><a href="../estoque/">Estoque</a></li>
+      <li><a href="../index.html#sobre">Sobre</a></li>
+      <li><a href="../sobre/">Nossa História</a></li>
+      <li><a href="../index.html#localizacao">Localização</a></li>
+      <li><a href="https://www.instagram.com/sul_veiculosmt/" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+
+  <main id="topo">
+
+    <!-- Hero do veículo — montado via js/veiculo-page.js a partir do Supabase -->
+    <section class="vehicle-detail-hero" data-vehicle-root hidden>
+      <div class="container">
+        <a class="vehicle-detail-back" href="../estoque/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+          Voltar para o estoque
+        </a>
+
+        <div class="vehicle-detail-inner">
+          <div class="vehicle-gallery reveal is-visible">
+            <div class="vehicle-gallery-main">
+              <img id="galleryMain" src="" alt="" />
+              <button class="gallery-nav gallery-nav-prev" id="galleryPrev" type="button" aria-label="Foto anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+              </button>
+              <button class="gallery-nav gallery-nav-next" id="galleryNext" type="button" aria-label="Próxima foto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+              <span class="gallery-counter" id="galleryCounter"></span>
+              <button class="gallery-expand" id="galleryExpand" type="button" aria-label="Ampliar foto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+              </button>
+            </div>
+            <div class="vehicle-gallery-thumbs" id="galleryThumbs"><!-- gerado via js/veiculo-page.js --></div>
+          </div>
+
+          <div class="vehicle-detail-info reveal is-visible">
+            <div class="vehicle-detail-brand" data-vehicle-marca></div>
+            <h1 data-vehicle-nome></h1>
+
+            <div class="vehicle-detail-specs" id="specGrid"><!-- gerado via js/veiculo-page.js --></div>
+
+            <div class="vehicle-detail-price">
+              <span>À vista</span>
+              <span data-vehicle-preco></span>
+            </div>
+
+            <div class="vehicle-detail-actions">
+              <a class="btn btn-primary" id="whatsappCta" target="_blank" rel="noopener">
+                Consultar no WhatsApp
+              </a>
+              <button class="btn btn-blue" id="financeSimBtn" type="button">Simular financiamento</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="vehicle-detail-hero-foot">
+          <a class="btn btn-outline btn-sm" href="../estoque/">Ver outros veículos</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="vehicle-detail-hero" data-vehicle-notfound hidden>
+      <div class="container" style="text-align:center; max-width:560px;">
+        <span class="eyebrow">Veículo não encontrado</span>
+        <h1 style="margin-top:12px;">Esse veículo não está mais disponível</h1>
+        <p style="color:var(--text-muted); margin-top:12px;">Ele pode ter sido vendido ou o link está incorreto. Veja o restante do nosso estoque.</p>
+        <a class="btn btn-primary" href="../estoque/" style="margin-top:24px;">Ver estoque completo</a>
+      </div>
+    </section>
+
+    <!-- Simulador de financiamento (modal) -->
+    <div class="finance-modal" id="financeSim" data-vehicle-label="" data-wa-number="5566992123356" aria-hidden="true">
+      <div class="finance-modal-backdrop" id="financeModalBackdrop"></div>
+      <div class="finance-card">
+        <div class="finance-card-head">
+          <span class="finance-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V7a2 2 0 0 0-2-2h-1.2a5 5 0 0 0-9.6 0H5a2 2 0 0 0-2 2v1" /><path d="M2 11a9 9 0 0 1 18 0v3a4 4 0 0 1-4 4h-1v3H9v-3H8a4 4 0 0 1-4-4" /><circle cx="15" cy="11" r="1" fill="currentColor" stroke="none" /></svg>
+          </span>
+          <span class="finance-card-title">Simule seu financiamento</span>
+          <button class="finance-modal-close" id="financeModalClose" type="button" aria-label="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </div>
+
+        <div class="finance-card-inner">
+          <p class="finance-card-lead">Preencha os dados abaixo e envie uma simulação direto para o WhatsApp do vendedor.</p>
+
+          <div class="finance-notice">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+            <span>Seus dados são confidenciais e enviados <strong>somente para a loja</strong> via WhatsApp. Não armazenamos nenhuma informação.</span>
+          </div>
+
+          <form class="finance-form" id="financeSimForm">
+            <div class="finance-row">
+              <div class="finance-field">
+                <label for="fsEntrada">Valor da entrada</label>
+                <div class="finance-input">
+                  <span>R$</span>
+                  <input type="text" id="fsEntrada" inputmode="numeric" placeholder="Ex: 10.000" />
+                </div>
+              </div>
+              <div class="finance-field">
+                <label>Possui CNH?</label>
+                <div class="finance-toggle" data-toggle="cnh">
+                  <button type="button" class="finance-toggle-btn is-active" data-value="Sim">Sim, tenho CNH</button>
+                  <button type="button" class="finance-toggle-btn" data-value="Não">Não tenho</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="finance-row">
+              <div class="finance-field">
+                <label>Quantidade de parcelas desejada</label>
+                <div class="finance-chips" data-toggle="parcelas">
+                  <button type="button" class="finance-chip is-active" data-value="12x">12x</button>
+                  <button type="button" class="finance-chip" data-value="24x">24x</button>
+                  <button type="button" class="finance-chip" data-value="36x">36x</button>
+                  <button type="button" class="finance-chip" data-value="48x">48x</button>
+                  <button type="button" class="finance-chip" data-value="60x">60x</button>
+                </div>
+              </div>
+              <div class="finance-field">
+                <label for="fsParcela">Valor da parcela desejada</label>
+                <div class="finance-input">
+                  <span>R$</span>
+                  <input type="text" id="fsParcela" inputmode="numeric" placeholder="Ex: 1.500" />
+                </div>
+              </div>
+            </div>
+
+            <div class="finance-field">
+              <label for="fsNome">Nome completo</label>
+              <div class="finance-input">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 4-6 8-6s8 2 8 6" /></svg>
+                <input type="text" id="fsNome" placeholder="Seu nome completo" required />
+              </div>
+            </div>
+
+            <div class="finance-row">
+              <div class="finance-field">
+                <label for="fsTelefone">Telefone / WhatsApp</label>
+                <div class="finance-input">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.4 1.9.6 2.9.7a2 2 0 0 1 1.6 2Z" /></svg>
+                  <input type="tel" id="fsTelefone" placeholder="(00) 00000-0000" required />
+                </div>
+              </div>
+              <div class="finance-field">
+                <label for="fsNascimento">Data de nascimento</label>
+                <div class="finance-input">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>
+                  <input type="text" id="fsNascimento" placeholder="DD/MM/AAAA" />
+                </div>
+              </div>
+            </div>
+
+            <div class="finance-field">
+              <label>Tipo de documento</label>
+              <div class="finance-toggle" data-toggle="doc">
+                <button type="button" class="finance-toggle-btn is-active" data-value="CPF">CPF</button>
+                <button type="button" class="finance-toggle-btn" data-value="CNPJ">CNPJ</button>
+              </div>
+            </div>
+
+            <div class="finance-field">
+              <label id="fsDocLabel" for="fsDocumento">CPF</label>
+              <div class="finance-input">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" /><circle cx="8" cy="12" r="2" /><path d="M14 10h4M14 14h3" /></svg>
+                <input type="text" id="fsDocumento" placeholder="000.000.000-00" />
+              </div>
+            </div>
+
+            <button type="submit" class="finance-submit">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6l.4-.5c.1-.1.2-.3.2-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.3-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1l-.2-.1Z" /><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Z" /></svg>
+              Enviar simulação no WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Itens e opcionais -->
+    <section class="vehicle-features section" data-vehicle-root hidden id="featuresSection">
+      <div class="container">
+        <div class="section-head reveal is-visible">
+          <div class="section-head-row">
+            <span class="eyebrow">Equipamentos</span>
+            <span class="vehicle-features-count" id="featuresCount"></span>
+          </div>
+          <h2>Opcionais e itens de série</h2>
+        </div>
+
+        <div class="vehicle-features-box reveal is-visible">
+          <div class="vehicle-features-grid" id="featuresGrid"><!-- gerado via js/veiculo-page.js --></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carros similares -->
+    <section class="similar-section section" id="similarSection" data-vehicle-root hidden>
+      <div class="container">
+        <div class="section-head reveal is-visible">
+          <span class="eyebrow">Você também pode gostar</span>
+          <h2>Outras opções parecidas</h2>
+        </div>
+        <div class="similar-grid reveal is-visible" id="similarVehicles"><!-- gerado via js/veiculo-page.js --></div>
+      </div>
+    </section>
+
+    <!-- Lightbox da foto principal -->
+    <div class="lightbox" id="vehicleLightbox" aria-hidden="true">
+      <button class="lightbox-close" id="vehicleLightboxClose" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+      </button>
+      <button class="gallery-nav gallery-nav-prev" id="lightboxPrev" type="button" aria-label="Foto anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+      </button>
+      <button class="gallery-nav gallery-nav-next" id="lightboxNext" type="button" aria-label="Próxima foto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+      </button>
+      <img class="lightbox-img" id="vehicleLightboxImg" src="" alt="" />
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="../imagens/logo.png" alt="Sul Veículos" />
+          <p>Novos, seminovos e usados com procedência garantida. Em Primavera do Leste desde 2002.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="../estoque/">Estoque</a></li>
+            <li><a href="../index.html#sobre">Sobre</a></li>
+            <li><a href="../sobre/">Nossa História</a></li>
+            <li><a href="../index.html#localizacao">Localização</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="https://wa.me/5566992123356" target="_blank" rel="noopener">WhatsApp: (66) 99212-3356</a></li>
+            <li><a href="tel:+556634987918">(66) 3498-7918</a></li>
+            <li><a href="https://www.instagram.com/sul_veiculosmt/" target="_blank" rel="noopener">@sul_veiculosmt</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Horário</h4>
+          <ul>
+            <li>Seg. a sex.: 07:30 às 17:30</li>
+            <li>Sábado: 08:00 às 11:00</li>
+            <li>Domingo: Fechado</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; <span id="ano-atual"></span> Sul Veículos. Todos os direitos reservados.</span>
+        <span>R. Blumenau, 28, Primavera I, Primavera do Leste, MT</span>
+      </div>
+    </div>
+  </footer>
+
+  <a
+    class="whatsapp-float"
+    id="whatsappFloat"
+    href="https://wa.me/5566992123356?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Sul%20Ve%C3%ADculos%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+    target="_blank"
+    rel="noopener"
+    aria-label="Falar no WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6l.4-.5c.1-.1.2-.3.2-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.3-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1l-.2-.1Z" /><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Z" /></svg>
+  </a>
+
+  <script src="../js/veiculos-data.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/veiculo-page.js"></script>
+</body>
+</html>

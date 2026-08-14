@@ -3,9 +3,14 @@
 
   function initEstoque() {
     var grid = document.getElementById('stockGrid');
-    if (!grid || typeof VEICULOS_DESTAQUE === 'undefined') return;
+    if (!grid || typeof window.VEICULOS_READY === 'undefined') return;
 
-    var DATA = VEICULOS_DESTAQUE.slice();
+    window.VEICULOS_READY.then(function (veiculos) {
+      startEstoque(grid, veiculos.slice());
+    });
+  }
+
+  function startEstoque(grid, DATA) {
     if (!DATA.length) return;
 
     var $ = function (sel) { return document.querySelector(sel); };
@@ -247,7 +252,7 @@
     }
 
     function cardHTML(v) {
-      var href = '../veiculos/' + v.slug + '/';
+      var href = v.path;
       var specs = (v.ano ? '<span>' + v.ano + '</span>' : '') +
         '<span>' + v.km.toLocaleString('pt-BR') + ' km</span>';
       var specs2 = (v.cambio ? '<span>' + v.cambio + '</span>' : '') +
@@ -256,7 +261,7 @@
       return (
         '<article class="vehicle-card reveal is-visible">' +
           '<a class="vehicle-media" href="' + href + '">' +
-            '<img src="../' + v.foto + '" alt="' + v.nome + '" loading="lazy"' + pos + ' />' +
+            '<img src="' + v.foto + '" alt="' + v.nome + '" loading="lazy"' + pos + ' />' +
           '</a>' +
           '<div class="vehicle-card-body">' +
             '<div class="vehicle-card-heading">' +
