@@ -190,11 +190,19 @@
 
   // ---------- Carros similares (mesma categoria do veículo atual) ----------
   function initSimilarVehicles() {
+    // Só as fichas estáticas (veiculos/golf, veiculos/tcross) têm esse atributo
+    // e usam essa função. A ficha dinâmica (/veiculo/:id, ver js/veiculo-page.js)
+    // monta os "similares" com o próprio código — sem esse retorno cedo, essa
+    // função não achava veículo nenhum (slug null) e apagava a seção inteira
+    // do DOM antes do veiculo-page.js conseguir usá-la, quebrando o resto do
+    // carregamento da página (galeria, financiamento etc. paravam de funcionar).
+    var slug = document.body.getAttribute('data-vehicle-slug');
+    if (!slug) return;
+
     var section = document.getElementById('similarSection');
     var wrap = document.getElementById('similarVehicles');
     if (!section || !wrap || typeof VEICULOS_DESTAQUE === 'undefined') return;
 
-    var slug = document.body.getAttribute('data-vehicle-slug');
     var atual = VEICULOS_DESTAQUE.filter(function (v) { return v.slug === slug; })[0];
     if (!atual) { section.remove(); return; }
 
@@ -239,6 +247,12 @@
     var backdrop = document.getElementById('financeModalBackdrop');
     var form = document.getElementById('financeSimForm');
     if (!modal || !form) return;
+    // Nas fichas estáticas isso roda 1x só (DOMContentLoaded). Na ficha
+    // dinâmica (/veiculo/:id) o modal já existe no HTML então essa mesma
+    // chamada roda de novo depois que os dados carregam (ver veiculo-page.js)
+    // — sem essa trava, os listeners duplicavam e cada clique disparava 2x.
+    if (modal.dataset.financeInit) return;
+    modal.dataset.financeInit = '1';
 
     function openModal() {
       modal.classList.add('is-open');

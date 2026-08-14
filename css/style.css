@@ -33,15 +33,21 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
-/* Trava o scroll horizontal da página inteira — qualquer elemento que passe
-   1px da largura da tela (nome de carro longo, seção full-bleed etc.) não
-   pode mais arrastar o site inteiro pro lado no mobile. Containers com
-   scroll horizontal de propósito (ex: .vehicle-grid no carrossel) continuam
-   funcionando normal. Usa "clip" em vez de "hidden": overflow diferente de
-   visible no html/body quebra o position:sticky da Trajetória em fotos
-   (.hero-scroll-sticky, ver comentário mais abaixo) — "clip" contém sem
-   virar scroll container, então não tem esse efeito colateral. */
-html, body { max-width: 100%; overflow-x: clip; }
+/* Trava o scroll horizontal — qualquer elemento que passe 1px da largura da
+   tela (nome de carro longo, seção full-bleed etc.) não pode mais arrastar
+   o site pro lado no mobile. Containers com scroll horizontal de propósito
+   (ex: .vehicle-grid no carrossel) continuam funcionando normal.
+   NUNCA no html/body: overflow diferente de visible num ancestral quebra
+   position:sticky — já aconteceu 2x (Trajetória em fotos e a galeria da
+   home) por causa disso. Em vez de um contêiner só lá em cima, aplica em
+   cada <section>/header/footer individualmente, e exclui à mão as duas
+   seções que têm sticky por dentro (.hero-scroll, .showcase) — novas
+   seções ganham a trava automaticamente, sem precisar lembrar de nada. */
+section:not(.hero-scroll):not(.showcase),
+header,
+footer {
+  overflow-x: clip;
+}
 
 body {
   margin: 0;
