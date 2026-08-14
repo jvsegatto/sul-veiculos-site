@@ -1570,7 +1570,11 @@ body[data-vehicle-slug] {
   overflow: hidden;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
 }
-.vehicle-gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+/* Padrão embaixo (mesma regra do card/thumb do estoque, carro sempre na
+   metade de baixo da foto) — só vale até o JS trocar por um enquadramento
+   manual específico daquela foto (data-position no botão da miniatura),
+   ver activate() em js/main.js. */
+.vehicle-gallery-main img { width: 100%; height: 100%; object-fit: cover; object-position: center 80%; }
 
 .gallery-nav {
   position: absolute;

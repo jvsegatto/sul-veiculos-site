@@ -131,7 +131,7 @@
       var pos = btn.getAttribute('data-position');
       main.src = full;
       if (alt) main.alt = alt;
-      main.style.objectPosition = pos || 'center center';
+      main.style.objectPosition = pos || 'center 80%';
       thumbs.forEach(function (b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
       btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });

@@ -247,7 +247,12 @@
           <a class="btn btn-blue showcase-cta" href="sobre/">Conheça nossa história</a>
         </div>
 
-        <div class="showcase-media reveal">
+        <!-- SEM "reveal" aqui: essa classe aplica transform (mesmo translateY(0) em
+             repouso) via CSS, e um ancestral com transform quebra position:sticky
+             em navegadores WebKit (Safari/iOS) — a galeria abaixo (#showcaseGalleryPin
+             > .showcase-gallery) depende de sticky pra funcionar. Confirmado: é
+             exatamente por isso que as fotos ficavam paradas no celular. -->
+        <div class="showcase-media">
           <div class="gallery-glow" aria-hidden="true">
             <span class="gallery-glow-blue"></span>
             <span class="gallery-glow-red"></span>
