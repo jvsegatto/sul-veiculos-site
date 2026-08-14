@@ -466,10 +466,7 @@
       pin.style.height = (gallery.getBoundingClientRect().height + EXTRA) + 'px';
     }
 
-    var ticking = false;
-
     function update() {
-      ticking = false;
       var rect = pin.getBoundingClientRect();
       var scrolled = -rect.top;
       var progress = clamp(scrolled / EXTRA, 0, 1);
@@ -500,21 +497,26 @@
       });
     }
 
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(update);
-    }
-
     function onResize() {
       measure();
       update();
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    // Loop contínuo em vez de atualizar só no evento "scroll": no Safari/iOS
+    // o evento de scroll dispara bem menos vezes durante a rolagem por
+    // inércia (o dedo já soltou a tela) do que no Chrome — com o update
+    // preso ao evento, a animação ficava parada durante o gesto e só
+    // "pulava" pra posição final quando o scroll parava de vez e o
+    // navegador finalmente disparava o evento. Rodar a cada frame (rAF)
+    // não depende de quantas vezes o scroll dispara, sempre acompanha.
+    function loop() {
+      update();
+      window.requestAnimationFrame(loop);
+    }
+
     window.addEventListener('resize', onResize);
     measure();
-    update();
+    window.requestAnimationFrame(loop);
   }
 
   // ---------- Lightbox da galeria "Nossa história" ----------

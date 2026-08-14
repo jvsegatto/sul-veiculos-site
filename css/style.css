@@ -727,7 +727,12 @@ section.section { padding: 88px 0; }
 
 .showcase-media { position: relative; min-width: 0; }
 
-.gallery-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+/* overflow: hidden aqui (não no .showcase-media/section pai, que não pode
+   ter overflow diferente de visible por causa do sticky da galeria) — os
+   brilhos abaixo vazam bem além da viewport em vw (confirmado no WebKit,
+   o motor do Safari, que mede isso diferente do Chromium) e essa é a
+   causa real do site deslizando pro lado no iOS. */
+.gallery-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .gallery-glow span {
   position: absolute;
   width: 40vw;
