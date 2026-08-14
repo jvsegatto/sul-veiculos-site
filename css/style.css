@@ -33,6 +33,13 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* Trava o scroll horizontal da página inteira — qualquer elemento que passe
+   1px da largura da tela (nome de carro longo, seção full-bleed etc.) não
+   pode mais arrastar o site inteiro pro lado no mobile. Containers com
+   scroll horizontal de propósito (ex: .vehicle-grid no carrossel mobile)
+   continuam funcionando normal, isso só contém o documento em si. */
+html, body { max-width: 100%; overflow-x: hidden; }
+
 body {
   margin: 0;
   background: var(--bg);
