@@ -31,7 +31,7 @@ const MANUAL_VEICULOS = [
     combustivel: "Gasolina",
     km: 135000,
     preco: 88000,
-    foto: "/veiculos/golf/sul_veiculosmt_1784845377_3947888468238833654_27165061037.jpg",
+    foto: "/veiculos/golf/sul_veiculosmt_1784845377_3947888468238833654_27165061037.webp",
     fotoPos: "center 80%",
   },
   {
@@ -46,7 +46,7 @@ const MANUAL_VEICULOS = [
     combustivel: "Flex",
     km: 59000,
     preco: 140000,
-    foto: "/veiculos/tcross/sul_veiculosmt_1785413315_3952652335760688180_27165061037.jpg",
+    foto: "/veiculos/tcross/sul_veiculosmt_1785413315_3952652335760688180_27165061037.webp",
     fotoPos: "center 80%",
   },
 ];

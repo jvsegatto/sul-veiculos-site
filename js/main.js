@@ -661,20 +661,17 @@
       var clipX1 = isMobile ? 0 : clip1;
       var clipX2 = isMobile ? 100 : clip2;
 
+      var fadeProgress = clamp((scrolled - h) / 400, 0, 1);
       if (image) {
         image.style.clipPath = 'polygon(' + clipX1 + '% ' + clip1 + '%, ' + clipX2 + '% ' + clip1 + '%, ' + clipX2 + '% ' + clip2 + '%, ' + clipX1 + '% ' + clip2 + '%)';
         image.style.backgroundSize = (170 - revealProgress * 70) + '%';
-
-        var fadeProgress = clamp((scrolled - h) / 400, 0, 1);
         image.style.opacity = String(1 - fadeProgress);
-
-        if (yearTag) {
-          yearTag.style.top = 'calc(' + clip1 + '% + 12px)';
-          yearTag.style.right = 'calc(' + clipX1 + '% + 12px)';
-          yearTag.style.opacity = String(1 - fadeProgress);
-        }
       }
 
+      // "top"/"right" do selo do ano mudam layout — lê a posição de todas as
+      // fotos em parallax ANTES de escrever essas duas propriedades, senão
+      // cada getBoundingClientRect() do loop abaixo força um reflow síncrono
+      // (o navegador precisa recalcular o layout que acabou de mudar).
       var vh = window.innerHeight;
       parallaxItems.forEach(function (item) {
         var itemRect = item.el.getBoundingClientRect();
@@ -692,6 +689,12 @@
         item.el.style.transform = 'translateY(' + y + 'px) scale(' + scale + ')';
         item.el.style.opacity = String(opacity);
       });
+
+      if (yearTag) {
+        yearTag.style.top = 'calc(' + clip1 + '% + 12px)';
+        yearTag.style.right = 'calc(' + clipX1 + '% + 12px)';
+        yearTag.style.opacity = String(1 - fadeProgress);
+      }
     }
 
     function onScroll() {
@@ -736,12 +739,18 @@
       var progress = denom > 0 ? (startY - rect.top) / denom : (rect.top <= startY ? 1 : 0);
       progress = clamp(progress, 0, 1);
 
+      // Lê a posição de todos os pontos ANTES de escrever a altura da barra —
+      // "height" muda layout, então escrever antes forçaria o navegador a
+      // recalcular o layout de novo pra cada getBoundingClientRect() do loop
+      // abaixo (reflow síncrono a cada frame de scroll, no celular trava).
+      var dotTops = [];
+      dots.forEach(function (dot) { dotTops.push(dot.getBoundingClientRect().top); });
+
       fill.style.height = (progress * listHeight) + 'px';
       fill.style.opacity = String(clamp(progress / 0.1, 0, 1));
 
-      dots.forEach(function (dot) {
-        var dotTop = dot.getBoundingClientRect().top;
-        dot.classList.toggle('is-active', dotTop < endY);
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('is-active', dotTops[i] < endY);
       });
     }
 
