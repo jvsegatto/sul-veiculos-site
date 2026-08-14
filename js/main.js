@@ -25,7 +25,11 @@
         '<span>' + formatKM(v.km) + '</span>';
       var pos = v.fotoPos ? ' style="object-position:' + v.fotoPos + '"' : '';
       return (
-        '<article class="vehicle-card reveal">' +
+        // "is-visible" direto — sem isso o card nasce invisível: entra depois
+        // que initReveal() já rodou (esse grid só é montado quando o fetch no
+        // Supabase termina, ver VEICULOS_READY), então o IntersectionObserver
+        // nunca chega a observar esses elementos novos.
+        '<article class="vehicle-card reveal is-visible">' +
           '<a class="vehicle-media" href="' + href + '">' +
             '<img src="' + v.foto + '" alt="' + v.nome + '" loading="lazy"' + pos + ' />' +
           '</a>' +
