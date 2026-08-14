@@ -43,12 +43,12 @@ html, body { touch-action: manipulation; }
    o site pro lado no mobile. Containers com scroll horizontal de propósito
    (ex: .vehicle-grid no carrossel) continuam funcionando normal.
    NUNCA no html/body: overflow diferente de visible num ancestral quebra
-   position:sticky — já aconteceu (Trajetória em fotos) por causa disso. Em
-   vez de um contêiner só lá em cima, aplica em cada <section>/header/footer
-   individualmente, e exclui à mão a única seção com sticky por dentro
-   (.hero-scroll) — novas seções ganham a trava automaticamente, sem
-   precisar lembrar de nada. */
-section:not(.hero-scroll),
+   position:sticky — já aconteceu 2x (Trajetória em fotos e a galeria da
+   home) por causa disso. Em vez de um contêiner só lá em cima, aplica em
+   cada <section>/header/footer individualmente, e exclui à mão as duas
+   seções que têm sticky por dentro (.hero-scroll, .showcase) — novas
+   seções ganham a trava automaticamente, sem precisar lembrar de nada. */
+section:not(.hero-scroll):not(.showcase),
 header,
 footer {
   overflow-x: clip;
@@ -1955,7 +1955,11 @@ body[data-vehicle-slug] {
   .vehicle-detail-hero { padding: 130px 0 40px; }
   .vehicle-gallery-thumb { flex-basis: 48px; }
   .vehicle-features { padding: 64px 0; }
-  .similar-grid .vehicle-card { flex: 0 0 82%; }
+  /* Carrossel de 1 card centralizado por vez, igual ao de destaques da home
+     (#vehicle-grid) — antes mostrava 82% do card com um pedaço do próximo
+     espiando, agora sempre um veículo inteiro, snap obrigatório. */
+  .similar-grid { scroll-snap-type: x mandatory; gap: 0; }
+  .similar-grid .vehicle-card { flex: 0 0 100%; min-width: 0; scroll-snap-align: center; margin: 0; }
   .finance-row { grid-template-columns: 1fr; }
   .finance-modal { padding: 70px 12px 24px; }
   .finance-card-head { padding: 16px 18px; }
@@ -2153,20 +2157,26 @@ body.lightbox-open { overflow: hidden; }
   .showcase-text .showcase-cta { display: none; }
   .showcase-cta-mobile { display: inline-flex; justify-self: start; margin-top: 0; }
   .showcase-cta { margin-top: 28px; }
-  /* 3 fotos empilhadas, cada uma na própria linha, sem animação de scroll —
-     o efeito de pilha revelando (position:sticky + transform via JS,
-     ver initGalleryStack em js/main.js) ficava com as fotos sobrepostas e
-     rotacionadas por cima umas das outras durante boa parte do scroll,
-     bagunçado. Estático é sempre confiável, então trocado por isso. */
   .showcase-gallery { grid-template-columns: 1fr; }
-  .g-then, .g-now, .g-wide { grid-column: 1; aspect-ratio: 16/10; transform: none !important; }
+  .g-then, .g-now, .g-wide { grid-column: 1; aspect-ratio: 16/10; }
   .g-then { grid-row: 1; }
   .g-now { grid-row: 2; }
   .g-wide { grid-row: 3; }
   .gallery-arrow-1 { grid-column: 1; grid-row: 1; justify-self: center; align-self: end; margin-right: 0; margin-bottom: -17px; }
   .gallery-arrow-1 svg { transform: rotate(90deg); }
-  .gallery-arrow-2 { grid-column: 1; grid-row: 2; justify-self: center; align-self: end; margin-bottom: -17px; }
-  .gallery-arrow-2 svg { transform: rotate(90deg); }
+  .gallery-arrow-2 { grid-column: 1; grid-row: 2; }
+  .showcase-gallery .gallery-photo { will-change: transform; }
+  .showcase { overflow: visible; }
+  .showcase-gallery-pin { position: relative; }
+  .showcase-gallery { position: sticky; top: 84px; }
+  .gallery-arrow {
+    opacity: 0;
+    z-index: 20;
+    background: none;
+    backdrop-filter: none;
+    border: none;
+    will-change: transform, opacity;
+  }
   .cta-banner { padding: 64px 0; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .header-actions .whatsapp-header-btn span { display: none; }

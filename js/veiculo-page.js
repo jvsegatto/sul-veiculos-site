@@ -75,10 +75,11 @@
 
     wrap.innerHTML = similares.map(function (o) {
       var specs = (o.ano ? '<span>' + o.ano + '</span>' : '') + '<span>' + km(o.km) + '</span>';
+      var pos = o.fotoPos ? ' style="object-position:' + o.fotoPos + '"' : '';
       return (
         '<article class="vehicle-card">' +
           '<a class="vehicle-media" href="' + o.path + '">' +
-            '<img src="' + o.foto + '" alt="' + o.nome + '" loading="lazy" />' +
+            '<img src="' + o.foto + '" alt="' + o.nome + '" loading="lazy"' + pos + ' />' +
           '</a>' +
           '<div class="vehicle-card-body">' +
             '<div class="vehicle-card-heading">' +
