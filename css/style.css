@@ -36,9 +36,12 @@ html { scroll-behavior: smooth; }
 /* Trava o scroll horizontal da página inteira — qualquer elemento que passe
    1px da largura da tela (nome de carro longo, seção full-bleed etc.) não
    pode mais arrastar o site inteiro pro lado no mobile. Containers com
-   scroll horizontal de propósito (ex: .vehicle-grid no carrossel mobile)
-   continuam funcionando normal, isso só contém o documento em si. */
-html, body { max-width: 100%; overflow-x: hidden; }
+   scroll horizontal de propósito (ex: .vehicle-grid no carrossel) continuam
+   funcionando normal. Usa "clip" em vez de "hidden": overflow diferente de
+   visible no html/body quebra o position:sticky da Trajetória em fotos
+   (.hero-scroll-sticky, ver comentário mais abaixo) — "clip" contém sem
+   virar scroll container, então não tem esse efeito colateral. */
+html, body { max-width: 100%; overflow-x: clip; }
 
 body {
   margin: 0;
