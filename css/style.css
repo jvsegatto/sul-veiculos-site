@@ -2058,6 +2058,12 @@ body[data-vehicle-slug] {
   color: var(--text-faint);
 }
 
+.footer-credit a {
+  color: var(--text-faint);
+  transition: color 0.2s var(--ease);
+}
+.footer-credit a:hover { color: var(--text-muted); }
+
 /* Rodapé minimalista: em toda página exceto a home (todas as telas) */
 body:not([data-page="home"]) .site-footer { padding-top: 0; border-top: none; }
 body:not([data-page="home"]) .footer-top { display: none; }
