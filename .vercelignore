@@ -1,1 +1,14 @@
-estoque-master
+# Lista de LIBERADOS: só o site público sobe pra Vercel. Tudo que não estiver
+# listado aqui fica fora do deploy (admin-app, estoque-master, .env, rascunhos),
+# então pasta nova nunca vaza por acidente. Criou pasta nova do site? Libere aqui.
+/*
+!/index.html
+!/vercel.json
+!/css
+!/js
+!/imagens
+!/sobre
+!/estoque
+!/veiculo
+!/veiculos
+/veiculos/**/*.txt
