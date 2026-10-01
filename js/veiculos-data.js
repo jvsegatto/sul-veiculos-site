@@ -4,11 +4,12 @@
  * cadastrado/editado no painel (com status "Disponível") aparece aqui sem
  * precisar tocar neste arquivo.
  *
- * MANUAL_VEICULOS abaixo são os 2 carros com ficha 100% escrita à mão
- * (fotos e texto reais, capturados antes do painel existir) — continuam
- * fixos, sempre aparecem junto com o que vier do Supabase. Se um dia entrarem
- * no painel, pode apagar as entradas aqui (as páginas em veiculos/golf/ e
- * veiculos/tcross/ continuam existindo e podendo ser deletadas à parte).
+ * MANUAL_VEICULOS abaixo são carros com ficha 100% escrita à mão (fotos e
+ * texto reais, capturados antes do painel existir) — continuam fixos, sempre
+ * aparecem junto com o que vier do Supabase, e NÃO aparecem no painel. Quando
+ * um deles for cadastrado no painel, apagar a entrada aqui, apagar a pasta
+ * veiculos/<slug>/ e redirecionar o caminho antigo em vercel.json (como foi
+ * feito com o Golf), senão o carro aparece duplicado no site.
  *
  * Consumido por: js/main.js (home), js/estoque.js (/estoque) e
  * js/veiculo-page.js (/veiculo/:id) — todos leem `window.VEICULOS_DESTAQUE`
@@ -19,21 +20,6 @@ const SUPABASE_URL = "https://xmubechjrhjhddnximca.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtdWJlY2hqcmhqaGRkbnhpbWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2NjczODIsImV4cCI6MjEwMjI0MzM4Mn0.m0hHBzV5VD9lUq5fMdqGZthQsEiQnhnTKJBraxoBlxY";
 
 const MANUAL_VEICULOS = [
-  {
-    id: "golf",
-    path: "/veiculos/golf/",
-    slug: "golf",
-    nome: "Volkswagen Golf Highline 1.4 TSI",
-    marca: "Volkswagen",
-    categoria: "Hatch",
-    cambio: "Automático",
-    ano: "2014/2015",
-    combustivel: "Gasolina",
-    km: 135000,
-    preco: 88000,
-    foto: "/veiculos/golf/sul_veiculosmt_1784845377_3947888468238833654_27165061037.webp",
-    fotoPos: "center 80%",
-  },
   {
     id: "tcross",
     path: "/veiculos/tcross/",

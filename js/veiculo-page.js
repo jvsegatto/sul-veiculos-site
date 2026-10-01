@@ -3,7 +3,7 @@
  * ver vercel.json). Lê o id na URL, busca o carro em window.VEICULOS_DESTAQUE
  * (populado por js/veiculos-data.js a partir do Supabase) e monta a página.
  *
- * Os 2 veículos com ficha escrita à mão (golf, tcross) continuam nas próprias
+ * Os veículos com ficha escrita à mão (hoje só o tcross) continuam nas próprias
  * páginas estáticas em veiculos/<slug>/ — esta página aqui é só pros veículos
  * que vêm do painel admin (têm path "/veiculo/<uuid>").
  */

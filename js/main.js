@@ -227,7 +227,7 @@
 
   // ---------- Carros similares (mesma categoria do veículo atual) ----------
   function initSimilarVehicles() {
-    // Só as fichas estáticas (veiculos/golf, veiculos/tcross) têm esse atributo
+    // Só as fichas estáticas (hoje só veiculos/tcross) têm esse atributo
     // e usam essa função. A ficha dinâmica (/veiculo/:id, ver js/veiculo-page.js)
     // monta os "similares" com o próprio código — sem esse retorno cedo, essa
     // função não achava veículo nenhum (slug null) e apagava a seção inteira

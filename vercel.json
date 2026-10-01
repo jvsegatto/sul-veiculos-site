@@ -10,6 +10,9 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/veiculos/golf/:path*", "destination": "/veiculo/b192cd89-41e4-4776-8d75-df6ff06dadab", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/admin", "destination": "https://sul-veiculos.vercel.app/admin" },
     { "source": "/admin/:path*", "destination": "https://sul-veiculos.vercel.app/admin/:path*" },
